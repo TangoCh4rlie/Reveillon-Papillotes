@@ -18,12 +18,12 @@ export default function UserInfo({ user }: UserInfoProps) {
         Id : {user.id}
       </div>
       <div>
-        Name : {user.name}
+        Username : {user.username}
       </div>
       <div>
         Email : {user.email}
       </div>
-      <button className="font-medium mt-2 text-blue-600 hover:underline" onClick={handleLogout}>
+      <button className="font-medium mt-2 text-blue-600 hover:underline" onClick={handleLogout} >
         Log out
       </button>
     </div>

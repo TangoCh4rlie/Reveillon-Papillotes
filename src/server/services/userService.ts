@@ -1,18 +1,29 @@
-const authenticate = (username: string, password: string) => {
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+const authenticate = async (username: string, password: string) => {
 
     //TODO: Replace with actual authentication
+    const userInDb = await prisma.user.findFirst({
+        where: {
+            username: username
+        }
+    });
 
-    if (username !== "admin" && password !== "admin") {
+    if (!userInDb) {
         return null;
+    } else if (userInDb.password !== password) {
+        return null;
+    } else {
+        const user = {
+            id: userInDb.id,
+            username: userInDb.username,
+            email: userInDb.email
+        }
+    
+        return user
     }
-
-    const user = {
-        id: "9001",
-        name: "Admin",
-        email: "admin@localhost"
-    }
-
-    return user;
 }
 
 export const userService = {
