@@ -1,7 +1,3 @@
-export const userService = {
-    authenticate
-};
-
 const authenticate = (username: string, password: string) => {
 
     //TODO: Replace with actual authentication
@@ -18,3 +14,7 @@ const authenticate = (username: string, password: string) => {
 
     return user;
 }
+
+export const userService = {
+    authenticate
+};
