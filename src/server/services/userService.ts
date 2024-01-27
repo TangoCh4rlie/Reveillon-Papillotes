@@ -1,6 +1,4 @@
-import { PrismaClient, Prisma } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "@/lib/prisma";
 
 const authenticate = async (username: string, password: string) => {
 
