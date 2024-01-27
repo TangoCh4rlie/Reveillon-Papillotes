@@ -4,8 +4,8 @@ import UserInfo from "@/components/UserInfo";
 
 export default async function Home() {
 
-
   const authSession = await getServerAuthSession();
+
 
   return (
     <main className="flex items-center justify-center h-screen">

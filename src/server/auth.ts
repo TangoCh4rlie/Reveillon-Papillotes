@@ -5,7 +5,7 @@ import { userService } from "./services/userService";
 export const authOptions: NextAuthOptions = {
     session: {
         strategy: "jwt",
-        //TODO sepcify duration
+        maxAge: 24 * 60 * 60,
     },
     callbacks: {
         async jwt({ token, account, profile }) {
@@ -15,7 +15,6 @@ export const authOptions: NextAuthOptions = {
             return token;
         },
         async session({ session, token, user }) {
-            //@ts-ignore
             session.user.id = token.userId;
             return session;
         },
@@ -37,7 +36,7 @@ export const authOptions: NextAuthOptions = {
                     password: string
                 };
 
-                return userService.authenticate(username, password);
+                return await userService.authenticate(username, password) as any;
             }
         })
     ],

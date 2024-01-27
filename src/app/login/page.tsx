@@ -23,11 +23,15 @@ export default function LoginPage({ searchParams }: PageProps) {
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
-        await signIn("credentials", {
-            username: inputs.username,
-            password: inputs.password,
-            callbackUrl: "/",
-        });
+        try {
+            await signIn("credentials", {
+                username: inputs.username,
+                password: inputs.password,
+                callbackUrl: "/",
+            });
+        } catch (error: any) {
+            searchParams.error = error.message;
+        }
     }
     return (
         <>
@@ -82,7 +86,7 @@ export default function LoginPage({ searchParams }: PageProps) {
                         </div>
                         {searchParams.error && (
                             <p className="text-red-600 text-center capitalize">
-                                Login failed.
+                                {searchParams.error}
                             </p>
                         )}
                     </form>

@@ -1,27 +1,29 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 const authenticate = async (username: string, password: string) => {
 
-    //TODO: Replace with actual authentication
+
     const userInDb = await prisma.user.findFirst({
         where: {
             username: username
         }
     });
 
+
     if (!userInDb) {
         return null;
+        throw new Error("User not found");
     } else if (userInDb.password !== password) {
         return null;
+        throw new Error("Incorrect password");
     } else {
         const user = {
             id: userInDb.id,
-            username: userInDb.username,
+            name: userInDb.username,
             email: userInDb.email
         }
-    
         return user
     }
 }
@@ -29,3 +31,10 @@ const authenticate = async (username: string, password: string) => {
 export const userService = {
     authenticate
 };
+
+// catch (error) {
+//     if (error instanceof Prisma.PrismaClientKnownRequestError) {
+//         console.log(error.message)
+//         return null;
+//     }
+// }
