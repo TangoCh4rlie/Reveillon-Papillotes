@@ -90,6 +90,20 @@ export default function LoginPage({ searchParams }: PageProps) {
                             </p>
                         )}
                     </form>
+                    <div>
+                        <p>
+                            <span className="text-sm text-gray-900">
+                                Don't have an account?
+                            </span>
+                            <a
+                                href="/signup"
+                                className="font-medium text-indigo-600 hover:text-indigo-500"
+                            >
+                                {" "}
+                                Sign up
+                            </a>
+                        </p>
+                    </div>
 
                 </div>
             </div>

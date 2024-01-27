@@ -12,10 +12,6 @@ export default function UserInfo({ user }: UserInfoProps) {
     await signOut();
   }
 
-  const test = () => {
-    console.log(user);
-  }
-
   return(
    <div className="rounded-lg border shadow-lg p-10">
       <div>
@@ -27,9 +23,6 @@ export default function UserInfo({ user }: UserInfoProps) {
       <div>
         Email : {user.email}
       </div>
-      <button onClick={test}>
-        test
-      </button>
       <button className="font-medium mt-2 text-blue-600 hover:underline" onClick={handleLogout} >
         Log out
       </button>

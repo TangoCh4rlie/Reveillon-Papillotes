@@ -1,12 +1,25 @@
-import Link from "next/link";
+"use client";
 
-export default function Header() {
+import { getServerAuthSession } from "@/server/auth";
+import { signOut } from "next-auth/react";
+import Link from "next/link";
+import LogoutButton from "./logoutButton";
+
+export default async function Header() {
+
+    const authSession = await getServerAuthSession();
+
+    const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        await signOut();
+    }
+
     return (
-        <header>
+        <header className="flex space-x-10">
             <Link href="#">
                 <BookIcon className="h-6 w-6" />
             </Link>
-            <div>
+            <div className="flex space-x-2">
                 <Link href="#">
                     Home
                 </Link>
@@ -14,14 +27,20 @@ export default function Header() {
                     About
                 </Link>
             </div>
-            <div>
-                <Link href="#">
+            {!authSession && <div className="flex space-x-2">
+                <Link href="/login">
                     Login
                 </Link>
-                <Link href="#">
-                    Sign in
+                <Link href="/signup">
+                    Sign up
                 </Link>
-            </div>
+            </div>}
+            {authSession && <div className="flex space-x-2">
+                <Link href="/profile">
+                    Profile
+                </Link>
+                <LogoutButton />
+            </div>}
         </header>
     );
 }

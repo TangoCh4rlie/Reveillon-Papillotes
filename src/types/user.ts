@@ -3,3 +3,9 @@ export type User = {
     name?: string | null;
     email?: string | null;
 }
+
+export type UserCreateInput = {
+    name: string;
+    email: string;
+    password: string;
+}

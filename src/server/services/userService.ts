@@ -2,7 +2,6 @@ import prisma from "@/lib/prisma";
 
 const authenticate = async (username: string, password: string) => {
 
-
     const userInDb = await prisma.user.findFirst({
         where: {
             username: username
